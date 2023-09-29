@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.hamcrest.Matchers.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestWebApp extends QuizApplicationTests {
+public class TestQuestionApi extends QuizApplicationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;

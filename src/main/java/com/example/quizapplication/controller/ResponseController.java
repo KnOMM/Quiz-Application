@@ -31,9 +31,9 @@ public class ResponseController {
     }
 
     // changes response content
-    //    curl -X PUT -H "Content-Type: application/json" -d '{"text":"answer for sth2","isCorrect":true,"question":{"id":"3","topic":"new","difficultyRank":50,"content":"Who is the best?"}}' http://localhost:8080/api/responses/8
+    //    curl -X PUT -H "Content-Type: application/json" -d '{"text":"answer for sth2","isCorrect":true,"question":{"id":"{same correct question id}","topic":"new","difficultyRank":50,"content":"Who is the best?"}}' http://localhost:8080/api/responses/8
     // changes question the response belongs to
-    // curl -X PUT -H "Content-Type: application/json" -d '{"text":"answer for sth2","isCorrect":true,"question":{"id":"2","topic":"technology","difficultyRank":20,"content":"question2"}}' http://localhost:8080/api/responses/8
+    // curl -X PUT -H "Content-Type: application/json" -d '{"text":"answer for sth2","isCorrect":true,"question":{"id":"{different question id}","topic":"technology","difficultyRank":20,"content":"question2"}}' http://localhost:8080/api/responses/8
     @PutMapping("responses/{id}")
     public ResponseEntity<Response> updateResponse(@PathVariable long id, @RequestBody Response response) {
         return new ResponseEntity<>(responseService.updateResponse(response, id), HttpStatus.OK);

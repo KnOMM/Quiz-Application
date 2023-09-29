@@ -5,6 +5,7 @@ import com.example.quizapplication.dto.ResponseDto;
 import com.example.quizapplication.entity.Question;
 import com.example.quizapplication.entity.Response;
 import com.example.quizapplication.exception.ResourceNotFoundException;
+import com.example.quizapplication.repository.QuestionRepository;
 import com.example.quizapplication.repository.ResponseRepository;
 import com.example.quizapplication.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ResponseServiceImpl implements ResponseService {
     private final ResponseRepository responseRepository;
+    private final QuestionRepository questionRepository;
 
     @Override
     public Map<QuestionDto, List<ResponseDto>> getQuiz() {
@@ -37,12 +39,18 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public Response saveResponse(Response response) {
+        questionRepository.findById(response.getQuestion().getId())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Question", response.getQuestion().getId(), "id"));
         return responseRepository.save(response);
     }
 
     @Override
     public Response updateResponse(Response response, long id) {
         Response existingResponse = responseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Response", id, "id"));
+        questionRepository.findById(response.getQuestion().getId())
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Question", id, "id"));
         existingResponse.setQuestion(response.getQuestion());
