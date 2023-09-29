@@ -2,11 +2,9 @@ package com.example.quizapplication.controller;
 
 import com.example.quizapplication.dto.QuestionDto;
 import com.example.quizapplication.entity.Question;
-import com.example.quizapplication.entity.Response;
 import com.example.quizapplication.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
