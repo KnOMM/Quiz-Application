@@ -103,4 +103,12 @@ public class TestQuestionApi extends QuizApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    public void i_testQuestionsWithParam() throws Exception {
+        mockMvc.perform(get("/api/questions?topic=technology")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
+    }
 }
